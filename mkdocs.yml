@@ -1,0 +1,65 @@
+site_name: Gazebo Harmonic Kr
+site_description: 'Harmonic Documentation'
+site_author: 'B1ackburn' 
+
+theme:
+  name: material # 또는 다른 테마 (e.g., readthedocs, mkdocs)
+
+# 기본 문서 디렉토리 설정
+docs_dir: 'docs'
+
+# 사이트 생성 디렉토리 설정
+site_dir: 'site'
+
+# 정적 파일 디렉토리 설정
+extra_javascript:
+  - 'js/extra.js'
+
+# 정적 파일 경로
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/gazebosim/gz-sim
+
+# 이미지 가져오기 설정
+markdown_extensions:
+  - attr_list
+  - md_in_html
+
+# 사이트 URL
+site_url: http://localhost:8000/
+
+# 디렉토리 구조 조정
+use_directory_urls: false
+
+nav:
+  - 'Home': 'index.md'  # 메인 페이지 추가
+  - 'Install':
+    - 'Harmonic installation instructions': 'install.md' # 설명은 페이지 내에 넣거나, MkDocs에서 직접 지원하지 않음
+    - 'Binary Ubuntu Install': 'install_ubuntu.md'
+    - 'Binary macOS Install': 'install_osx.md'
+    - 'Binary Windows Install': 'install_windows.md'
+    - 'Ubuntu Source Install': 'install_ubuntu_src.md'
+    - 'macOS Source Install': 'install_osx_src.md'
+    - 'Windows Source Install': 'install_windows_src.md'
+    - 'Troubleshooting': 'troubleshooting.md'
+  - 'Migration from Ignition': 'migration_from_ignition.md'
+  - 'Feature Comparison': 'comparison.md'
+  - 'Tutorials':
+    - 'Tutorials Home': 'tutorials.md' # tutorials.md가 목차 역할이라면 이렇게, 아니라면 바로 하위 페이지로
+    - 'Building your own robot': 'building_robot.md'
+    - 'Moving the robot': 'moving_robot.md'
+    - 'SDF worlds': 'sdf_worlds.md'
+    - 'Sensors': 'sensors.md'
+    - 'Actors': 'actors.md'
+    - 'Understanding the GUI': 'GUI_tutorial.md'
+    - 'Manipulating Models': 'Manipulating_models.md'
+    - 'Model Insertion from Fuel': 'Model_insertion_fuel.md'
+    - 'Keyboard Shortcuts': 'hotkeys.md'
+    - 'Spawn URDF': 'spawn_urdf.md'
+    - 'ROS 2 integration overview': 'ros2_overview.md'
+    - 'Launch Gazebo from ROS 2': 'ros2_launch_gazebo.md'
+    - 'Use ROS 2 to interact with Gazebo': 'ros2_integration.md'
+    - 'Use ROS 2 to spawn a Gazebo model': 'ros2_spawn_model.md'
+    - 'ROS 2 interoperability': 'ros2_interop.md'
+    - 'ROS 2 integration template': 'ros_gz_project_template_guide.md' 
