@@ -1,0 +1,14 @@
+/* 이미지 경로 문제 해결을 위한 CSS */
+img[src^="../img/"],
+img[src^="../../img/"] {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+img[src^="../images/"],
+img[src^="../../images/"] {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+} 
