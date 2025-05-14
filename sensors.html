@@ -1301,6 +1301,13 @@ ROS를 사용하는 경우 이러한 예제에 대한 데모 실행 및 브리�
 <li><code>&lt;update_rate&gt;</code> 센서 데이터가 생성되는 빈도입니다.</li>
 <li><code>&lt;visualize&gt;</code> 참이면 센서가 GUI에 시각화됩니다.</li>
 <li><code>&lt;topic&gt;</code> 데이터가 게시되는 토픽의 이름입니다.</li>
+<li><code>&lt;mean&gt;</code> 평균값 (보통 0, 센서 노이즈의 중심)</li>
+<li><code>&lt;stddev&gt;</code> 표준편차 (센서 랜덤 노이즈 크기)</li>
+<li><code>&lt;bias_mean&gt;</code> 바이어스 평균 (센서에 항상 존재하는 고정 오차)</li>
+<li><code>&lt;biad_stddev&gt;</code> 바이어스의 표준편차 (시간마다 바이어스가 달라질 수 있는 정도)</li>
+<li><code>&lt;dynamic_bias_stddev&gt;</code> 시간에 따라 변화하는 바이어스의 표준편차</li>
+<li><code>&lt;dynamic_bias_correlation_time&gt;</code> 동적 바이어스의 시간 상관관계, 클수록 변화가 느림</li>
+<li><code>&lt;precision&gt;</code> 최소 분해능, 가장 작은 감지 가능한 단위</li>
 </ul>
 <p><strong>참고:</strong> 아직 모든 센서에 대해 모든 태그가 지원되는 것은 아닙니다.</p>
 <h3 id="read-data-from-imu">Read data from IMU</h3>
@@ -1434,20 +1441,46 @@ ROS를 사용하는 경우 이러한 예제에 대한 데모 실행 및 브리�
 &lt;/sensor&gt;
 </code></pre>
 <ul>
-<li>먼저 센서의 <code>name</code>과 <code>type</code>을 정의한 다음 <code>lidar_frame</code>을 기준으로 <code>&lt;pose&gt;</code>를 정의했습니다.</li>
-<li><code>&lt;topic&gt;</code>에서는 lidar 데이터가 게시될 토픽을 정의합니다.</li>
-<li><code>&lt;update_rate&gt;</code>는 <code>lidar</code> 데이터가 생성되는 빈도로, 이 경우 <code>10Hz</code>이며 <code>0.1초</code>와 같습니다.</li>
-<li><code>&lt;horizontal&gt;</code> 및 <code>&lt;vertical&gt;</code> 태그 아래에서 수평 및 수직 레이저 광선의 속성을 정의합니다.</li>
-<li><code>&lt;samples&gt;</code>는 전체 레이저 스윕 주기당 생성할 시뮬레이션된 lidar 광선의 수입니다.</li>
-<li><code>&lt;resolution&gt;</code>: 이 숫자는 샘플과 곱하여 범위 데이터 포인트 수를 결정합니다.</li>
-<li><code>&lt;min_angle&gt;</code> 및 <code>&lt;max_angle&gt;</code>은 생성된 광선의 각도 범위입니다.</li>
-<li><code>&lt;range&gt;</code> 아래에서 각 시뮬레이션된 광선의 범위 속성을 정의합니다.<ul>
-<li><code>&lt;min&gt;</code> 및 <code>&lt;max&gt;</code>는 각 lidar 광선의 최소 및 최대 거리를 정의합니다.</li>
-<li>여기서 <code>&lt;resolution&gt;</code> 태그는 각 lidar 광선의 선형 해상도를 정의합니다.</li>
+<li>센서의 <code>name</code>(이름)과 <code>type</code>(유형)을 정의하고, <code>&lt;pose relative_to='lidar_frame'&gt;</code>을 사용하여 <code>lidar_frame</code>에 상대적인 센서의 위치와 방향을 설정합니다. (참고: 예제에서는 <code>lidar_frame</code>을 사용하지만, 일반적으로 <code>base_link</code>와 같은 로봇의 기준 프레임에 상대적으로 정의합니다.)</li>
+<li><code>&lt;topic&gt;</code>: Lidar 데이터가 게시될 토픽의 이름입니다.</li>
+<li><code>&lt;update_rate&gt;</code>: 데이터 발행 주기(Hz)입니다. 예제에서는 <code>10Hz</code>로, <code>0.1초</code>마다 데이터가 생성됩니다.</li>
+<li><code>&lt;ray&gt;</code>: Lidar 광선과 관련된 설정을 포함하는 부모 태그입니다.<ul>
+<li><code>&lt;scan&gt;</code>: 스캔 패턴과 관련된 설정을 정의합니다.<ul>
+<li><code>&lt;horizontal&gt;</code>: 수평 스캔에 대한 설정을 정의합니다.<ul>
+<li><code>&lt;samples&gt;</code>: 수평 방향으로 스캔할 레이(광선)의 개수입니다.</li>
+<li><code>&lt;resolution&gt;</code>: 수평 해상도 배율입니다. 일반적으로 <code>1</code>로 설정되며, 이 경우 <code>&lt;samples&gt;</code> 값과 동일한 수의 데이터 포인트가 생성됩니다.</li>
+<li><code>&lt;min_angle&gt;</code> 및 <code>&lt;max_angle&gt;</code>: 수평 스캔의 시작 각도와 끝 각도 (라디안 단위)입니다. 예를 들어, 예제의 <code>-1.396263</code> rad에서 <code>1.396263</code> rad는 약 ±80도에 해당합니다.</li>
 </ul>
 </li>
-<li><code>&lt;always_on&gt;</code>: 참이면 센서가 <code>&lt;update_rate&gt;</code>에 따라 항상 업데이트됩니다.</li>
-<li><code>&lt;visualize&gt;</code>: 참이면 센서가 GUI에 시각화됩니다.</li>
+<li><code>&lt;vertical&gt;</code>: 수직 스캔에 대한 설정을 정의합니다. (2D Lidar의 경우, 수직 스캔은 단일 평면을 나타냅니다.)<ul>
+<li><code>&lt;samples&gt;</code>: 수직 방향으로 스캔할 레이의 개수입니다. 2D Lidar의 경우 보통 <code>1</code>입니다.</li>
+<li><code>&lt;resolution&gt;</code>: 수직 해상도 배율입니다.</li>
+<li><code>&lt;min_angle&gt;</code> 및 <code>&lt;max_angle&gt;</code>: 수직 스캔의 시작 각도와 끝 각도 (라디안 단위)입니다. 2D Lidar의 경우 보통 <code>0</code>으로 설정하여 단일 수평면을 스캔합니다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>&lt;range&gt;</code>: 각 레이의 거리 측정 능력과 관련된 설정을 정의합니다.<ul>
+<li><code>&lt;min&gt;</code>: 센서가 감지할 수 있는 최소 거리 (미터 단위)입니다. 이보다 가까운 물체는 감지되지 않을 수 있습니다.</li>
+<li><code>&lt;max&gt;</code>: 센서가 감지할 수 있는 최대 거리 (미터 단위)입니다. 이보다 먼 물체는 감지되지 않을 수 있습니다.</li>
+<li><code>&lt;resolution&gt;</code>: 거리 측정값의 분해능 (미터 단위)입니다. 센서가 구분할 수 있는 최소 거리 변화량을 의미합니다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>&lt;always_on&gt;</code>: <code>true</code>로 설정하면 센서가 <code>&lt;update_rate&gt;</code>에 따라 항상 활성화되어 데이터를 생성합니다. <code>false</code>인 경우, 센서가 활성화되는 다른 메커니즘(예: 토픽 구독)이 필요할 수 있습니다.</li>
+<li><code>&lt;visualize&gt;</code>: <code>true</code>로 설정하면 시뮬레이션 GUI에서 센서의 레이가 시각적으로 표시됩니다. 디버깅에 유용합니다.</li>
+<li><code>&lt;noise&gt;</code> (선택 사항): 센서 데이터에 적용할 노이즈 모델을 정의합니다. 이를 통해 더 현실적인 센서 데이터를 시뮬레이션할 수 있습니다.<ul>
+<li><code>&lt;type&gt;</code>: 노이즈의 유형을 지정합니다 (예: <code>gaussian</code>은 가우시안 노이즈를 의미).</li>
+<li><code>&lt;mean&gt;</code>: 노이즈 분포의 평균값입니다. 가우시안 노이즈의 경우 보통 <code>0.0</code>입니다.</li>
+<li><code>&lt;stddev&gt;</code>: 노이즈 분포의 표준 편차입니다. 값이 클수록 노이즈의 변동성이 커집니다.</li>
+</ul>
+</li>
+<li><code>&lt;clip&gt;</code> (선택 사항): 센서의 렌더링 범위를 제한합니다. 주로 시각화 성능에 영향을 줄 수 있습니다.<ul>
+<li><code>&lt;near&gt;</code>: 이 값(미터 단위)보다 가까운 물체는 렌더링에서 제외될 수 있습니다.</li>
+<li><code>&lt;far&gt;</code>: 이 값(미터 단위)보다 먼 물체는 렌더링에서 제외될 수 있습니다.</li>
+</ul>
+</li>
 </ul>
 <p>이제 월드를 실행하고 왼쪽 하단 모서리에 있는 재생 버튼을 누릅니다.</p>
 <p><code>gz sim sensor_tutorial.sdf</code></p>
