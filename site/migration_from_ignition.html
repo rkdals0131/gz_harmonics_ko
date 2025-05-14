@@ -1,0 +1,2103 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Harmonic Documentation">
+      
+      
+        <meta name="author" content="B1ackburn">
+      
+      
+        <link rel="canonical" href="http://localhost:8000/migration_from_ignition.html">
+      
+      
+        <link rel="prev" href="troubleshooting.html">
+      
+      
+        <link rel="next" href="comparison.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.13">
+    
+    
+      
+        <title>Migration from Ignition - Gazebo Harmonic Kr</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#migration-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Gazebo Harmonic Kr" class="md-header__button md-logo" aria-label="Gazebo Harmonic Kr" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gazebo Harmonic Kr
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Migration from Ignition
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Gazebo Harmonic Kr" class="md-nav__button md-logo" aria-label="Gazebo Harmonic Kr" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Gazebo Harmonic Kr
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Install
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Harmonic installation instructions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_ubuntu.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary Ubuntu Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_osx.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary macOS Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_windows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary Windows Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_ubuntu_src.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ubuntu Source Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_osx_src.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    macOS Source Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_windows_src.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows Source Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="troubleshooting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Migration from Ignition
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="migration_from_ignition.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migration from Ignition
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      변경 사항
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tick-tocks-and-hard-tocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tick-tocks and Hard-tocks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tick-tocks and Hard-tocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tick-tocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tick-tocks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hard-tocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hard-tocks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#untocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Untocks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommendations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gotchas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gotchas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migration-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Steps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#migrate-files-and-file-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Files and File References
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-cmake" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate CMake
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-macros-and-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Macros and Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-sdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate SDF
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-plugins-and-shared-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Plugins and Shared Libraries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-bindings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Bindings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Messages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-headers-and-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Headers and Sources
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-your-cli-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Your CLI Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helpful-cli-redirection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Helpful CLI Redirection
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#double-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      Double-Check
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Packages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Additional Packages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ros_gz" class="md-nav__link">
+    <span class="md-ellipsis">
+      ros_gz
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="comparison.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Feature Comparison
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorials Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="building_robot.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Building your own robot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="moving_robot.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Moving the robot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sdf_worlds.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDF worlds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sensors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="actors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Actors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="GUI_tutorial.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Understanding the GUI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manipulating_models.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulating Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Model_insertion_fuel.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model Insertion from Fuel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="hotkeys.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Keyboard Shortcuts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spawn_urdf.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spawn URDF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ROS 2 integration overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_launch_gazebo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Launch Gazebo from ROS 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_integration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use ROS 2 to interact with Gazebo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_spawn_model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use ROS 2 to spawn a Gazebo model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_interop.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ROS 2 interoperability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros_gz_project_template_guide.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ROS 2 integration template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      변경 사항
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tick-tocks-and-hard-tocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tick-tocks and Hard-tocks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tick-tocks and Hard-tocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tick-tocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tick-tocks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hard-tocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hard-tocks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#untocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Untocks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommendations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gotchas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gotchas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migration-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Steps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#migrate-files-and-file-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Files and File References
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-cmake" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate CMake
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-macros-and-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Macros and Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-sdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate SDF
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-plugins-and-shared-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Plugins and Shared Libraries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-bindings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Bindings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Messages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-headers-and-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Headers and Sources
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrate-your-cli-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrate Your CLI Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helpful-cli-redirection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Helpful CLI Redirection
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#double-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      Double-Check
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Packages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Additional Packages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ros_gz" class="md-nav__link">
+    <span class="md-ellipsis">
+      ros_gz
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="migration-guide">Migration Guide</h1>
+<p>안녕하세요 Gazebo 커뮤니티 여러분!!</p>
+<p>2022년 4월, <a href="https://community.gazebosim.org/t/a-new-era-for-gazebo/1356">"Ignition"이라는 이름을 폐기하고 "Gazebo"를 선호하기로 발표했습니다.</a>
+이 마이그레이션 가이드는 여러분의 패키지에서 필요한 변경 사항을 실행하는 데 도움이 될 것이며, 다행히도 Gazebo Classic에서의 이전만큼 번거롭지는 않을 것입니다!</p>
+<h2 id="overview">Overview</h2>
+<h3 id="_1">변경 사항</h3>
+<p>실제로 어떤 일이 일어나고 있나요? 요약하자면:</p>
+<ul>
+<li><code>Ignition</code> 또는 <code>ign</code> 이름이 사용될 때마다, 대소문자를 유지하면서 Gazebo 대응 이름(<code>Gazebo</code> 또는 <code>gz</code>)이 대신 사용됩니다.</li>
+<li><code>ign-gazebo</code> / <code>Ignition Gazebo</code>는 <code>gz-sim</code> / <code>Gazebo Sim</code>이 되었습니다.</li>
+<li>Ignition 로고가 Gazebo 로고로 교체되었습니다.</li>
+</ul>
+<p>이러한 변경 사항은 다음에서 이루어졌습니다:</p>
+<ul>
+<li>웹사이트</li>
+<li>GitHub 조직 및 저장소</li>
+<li>문서</li>
+<li>UI</li>
+<li>네임스페이스, 명령줄 도구, 공유 라이브러리, 디렉토리, API, 파일</li>
+</ul>
+<p>이는 사용자의 마이그레이션 노력 대부분이 파일 이름, 디렉토리 및 소스 코드의 지능적인 찾기 및 바꾸기를 포함한다는 것을 의미합니다.
+핵심 라이브러리에서 마이그레이션을 지원하기 위해 이루어진 변경 사항을 추적해야 하는 경우 <a href="https://github.com/gazebo-tooling/release-tools/issues/698">추적 GitHub 이슈</a>를 참조할 수도 있습니다.</p>
+<h3 id="tick-tocks-and-hard-tocks">Tick-tocks and Hard-tocks</h3>
+<p>이 섹션에서는 이루어진 다양한 변경 사항에 대한 개요만 제공합니다. tick-tock에 대한 자세한 목록은 각 개별 핵심 라이브러리 저장소의 마이그레이션 파일을 참조하세요:</p>
+<ul>
+<li><a href="https://github.com/gazebosim/gz-cmake/blob/main/Migration.md">gz-cmake</a></li>
+<li><a href="https://github.com/gazebosim/gz-common/blob/main/Migration.md">gz-common</a></li>
+<li><a href="https://github.com/gazebosim/gz-fuel-tools/blob/main/Migration.md">gz-fuel-tools</a></li>
+<li><a href="https://github.com/gazebosim/gz-gui/blob/main/Migration.md">gz-gui</a></li>
+<li><a href="https://github.com/gazebosim/gz-launch/blob/main/Migration.md">gz-launch</a></li>
+<li><a href="https://github.com/gazebosim/gz-math/blob/main/Migration.md">gz-math</a></li>
+<li><a href="https://github.com/gazebosim/gz-msgs/blob/main/Migration.md">gz-msgs</a></li>
+<li><a href="https://github.com/gazebosim/gz-physics/blob/main/Migration.md">gz-physics</a></li>
+<li><a href="https://github.com/gazebosim/gz-plugin/blob/main/Migration.md">gz-plugin</a></li>
+<li><a href="https://github.com/gazebosim/gz-rendering/blob/main/Migration.md">gz-rendering</a></li>
+<li><a href="https://github.com/gazebosim/gz-sensors/blob/main/Migration.md">gz-sensors</a></li>
+<li><a href="https://github.com/gazebosim/gz-sim/blob/main/Migration.md">gz-sim</a></li>
+<li><a href="https://github.com/gazebosim/gz-tools/blob/main/Migration.md">gz-tools</a></li>
+<li><a href="https://github.com/gazebosim/gz-transport/blob/main/Migration.md">gz-transport</a></li>
+<li><a href="https://github.com/gazebosim/gz-utils/blob/main/Migration.md">gz-utils</a></li>
+<li><a href="https://github.com/gazebosim/sdformat/blob/main/Migration.md">sdformat</a></li>
+</ul>
+<p>또한 이 마이그레이션 가이드의 뒷부분에 있는 마이그레이션 포인터는 패키지를 Gazebo와 함께 사용할 준비를 하는 데 도움이 될 것입니다.</p>
+<p>일반적으로 말해서, 스택에 작성된 명시적인 tick-tock 로직 덕분에 Harmonic을 사용하는 경우 <strong>대부분의 것</strong>에 대해 Ignition 대응 항목 또는 Gazebo 대응 항목을 계속 사용할 수 있어야 합니다.
+Ignition 대응 항목을 사용하면 일반적으로 사용 중단 경고가 발생한다는 점에 유의하십시오.</p>
+<h4 id="tick-tocks">Tick-tocks</h4>
+<p>다음에 대한 Tick-tock이 구현되었지만, 모든 항목이 사용 중단 경고를 발생시키는 것은 아닙니다.
+이러한 tick-tock은 별칭으로 구현되거나, 대신 Gazebo 대응 항목을 대상으로 하는 어떤 종류의 리디렉션 메커니즘(예: 심볼릭 링크, 디렉토리 리타겟, 소스의 문자열 교체)을 가집니다.</p>
+<p>또한 소스 코드에서 이러한 tick-tock 대부분은 사용 중단되었음을 알리는 관련 주석이나 <code>GZ_DEPRECATED()</code> 매크로 호출이 있습니다.</p>
+<p><strong>Namespaces</strong></p>
+<ul>
+<li>Python 네임스페이스<ul>
+<li>예: <code>ignition.math.XXX</code> → <code>gz.math.XXX</code></li>
+</ul>
+</li>
+<li>C++ 네임스페이스<ul>
+<li>예: <code>ignition::gazebo::XXX</code> → <code>gz::sim::XXX</code></li>
+</ul>
+</li>
+<li>메시지 네임스페이스 및 패키지<ul>
+<li>예: <code>ignition.msgs.XXX</code> → <code>gz.msgs.XXX</code>, <code>ignition/msgs/header.proto</code> → <code>gz/msgs/header.proto</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Source</strong></p>
+<ul>
+<li>공개 헤더의 클래스 이름, 멤버, 함수 및 변수<ul>
+<li>예: <code>IgnitionFormatter</code> → <code>GzFormatter</code></li>
+</ul>
+</li>
+<li>공개 헤더<ul>
+<li>예: <code>include/ignition</code> → <code>include/gz</code></li>
+</ul>
+</li>
+<li>플러그인<ul>
+<li>예: <code>ignition::gazebo::systems::LiftDrag</code> → <code>gz::sim::systems::LiftDrag</code></li>
+</ul>
+</li>
+<li>공유 라이브러리<ul>
+<li>예: <code>libignition-gazebo-buoyancy-engine-system.so</code> → <code>libgz-sim-buoyancy-engine-system.so</code></li>
+<li><code>lib</code> 및 <code>.so</code> 접두사 및 접미사를 제거할 수 있습니다!</li>
+<li>예: <code>libignition-gazebo-buoyancy-engine-system.so</code> → <code>gz-sim-buoyancy-engine-system</code></li>
+</ul>
+</li>
+<li>공개 헤더의 C++ 매크로<ul>
+<li>예: <code>IGN_PARTITION</code> → <code>GZ_PARTITION</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>CMake and Packaging</strong></p>
+<ul>
+<li>CMake 매크로/함수<ul>
+<li>예: <code>ign_find_package()</code> → <code>gz_find_package()</code></li>
+</ul>
+</li>
+<li>CMake 매크로/함수 인수<ul>
+<li>예: <code>NO_IGNITION_PREFIX</code> → <code>NO_PROJECT_PREFIX</code></li>
+</ul>
+</li>
+<li>CMake 변수*<ul>
+<li>예: <code>IgnOGRE2_FOUND</code> → <code>GzOGRE2_FOUND</code></li>
+<li>모든 CMake 변수가 tick-tock 처리되지는 않지만, 다운스트림 라이브러리에서 사용되는 대부분은 처리됩니다.</li>
+</ul>
+</li>
+<li><code>gz_find_package()</code>로 찾은 CMake 패키지<ul>
+<li>예: <code>gz_find_package(IgnCURL)</code> → <code>gz_find_package(GzCURL)</code></li>
+</ul>
+</li>
+<li>Debian 패키지<ul>
+<li>예: <code>libignition-cmake3-dev</code> → <code>libgz-cmake3-dev</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Misc.</strong></p>
+<ul>
+<li>환경 변수 (이름 및 값)<ul>
+<li>예: <code>IGN_GAZEBO_RESOURCE_PATH</code> → <code>GZ_SIM_RESOURCE_PATH</code></li>
+</ul>
+</li>
+<li>명령줄<ul>
+<li>예: <code>ign</code> → <code>gz</code>, <code>ign gazebo</code> → <code>gz sim</code></li>
+</ul>
+</li>
+<li>GUI QML<ul>
+<li>예: <code>IgnSpinBox</code> → <code>GzSpinBox</code></li>
+</ul>
+</li>
+<li>토픽* (일반적으로 테스트에서)<ul>
+<li>예: <code>/ignition/XXX</code> → <code>/gz/XXX</code></li>
+<li><strong>참고:</strong> <code>/gazebo</code>는 <code>/sim</code>으로 마이그레이션되지 <strong>않습니다</strong>.</li>
+</ul>
+</li>
+<li>GitHub 조직 및 저장소<ul>
+<li>예: <code>ignitionrobotics</code> → <code>gazebosim</code> , <code>ign-cmake</code> → <code>gz-cmake</code></li>
+</ul>
+</li>
+<li>GitHub 액션 및 워크플로우<ul>
+<li>예: <code>ignition-tooling</code> → <code>gazebo-tooling</code></li>
+</ul>
+</li>
+<li>웹사이트<ul>
+<li>예: <a href="http://ignitionrobotics.org">ignitionrobotics.org</a> → <a href="http://gazebosim.org">gazebosim.org</a></li>
+</ul>
+</li>
+<li>SDF 및 launch 태그<ul>
+<li>예: <code>&lt;ignition-gui&gt;</code> → <code>&lt;gz-gui&gt;</code></li>
+</ul>
+</li>
+<li>SDF 네임스페이스<ul>
+<li>예: <code>ignition:type</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="hard-tocks">Hard-tocks</h4>
+<p>대신 hard-tock 처리된 몇 가지 예외가 있습니다. 즉, Gazebo 대응 항목을 <strong>반드시</strong> 사용해야 합니다.
+Ignition 대응 항목을 사용하면 컴파일이나 다른 것이 중단될 가능성이 높습니다 (단순히 문서 변경이 아닌 경우).</p>
+<p><strong>Namespaces</strong></p>
+<ul>
+<li>Ruby 네임스페이스<ul>
+<li>예: <code>ignition/math</code> → <code>gz/math</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Source</strong></p>
+<ul>
+<li>설치 공간<ul>
+<li>예: <code>install/share/ignition</code> → <code>install/share/gz</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>CMake and Packaging</strong></p>
+<ul>
+<li><code>gz-cmake</code>의 대부분의 포함 가능한 CMake 파일<ul>
+<li>예: <code>IgnUtils.cmake</code> → <code>GzUtils.cmake</code></li>
+</ul>
+</li>
+<li>Gazebo 라이브러리 CMake 프로젝트 이름<ul>
+<li>예: <code>ignition-utils2</code> → <code>gz-utils2</code></li>
+</ul>
+</li>
+<li>내부적으로 사용되는 CMake 변수<ul>
+<li>예: <code>IGN_TRANSPORT_VER</code> → <code>GZ_TRANSPORT_VER</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Misc.</strong></p>
+<ul>
+<li>Gazebo launch 파일 및 태그<ul>
+<li>예: <code>sim.ign</code> → <code>sim.gzlaunch</code>, <code>&lt;ign</code>  → <code>&lt;gz</code></li>
+</ul>
+</li>
+<li>설정 및 로그 경로 (보류 중)<ul>
+<li>예: <code>~/.ignition/gui/log</code> → <code>~/.gz/gui/log</code></li>
+<li>일부 설정 경로는 tick-tock 처리되었습니다 (예: <code>~/.ignition/gazebo/plugins</code>)</li>
+</ul>
+</li>
+<li>Fuel URL (보류 중)<ul>
+<li>예: https://fuel.ignitionrobotics.org</li>
+</ul>
+</li>
+<li>Fuel 캐시 경로 (역시 보류 중)<ul>
+<li>예: <code>~/.ignition/fuel</code> → <code>~/.gz/fuel</code></li>
+</ul>
+</li>
+<li>문서 및 주석의 라이브러리 이름<ul>
+<li>예: Ignition Gazebo → Gazebo Sim</li>
+</ul>
+</li>
+<li><code>gz-launch</code> Websocket 서버<ul>
+<li>예: <code>ign.js</code> → <code>gz.js</code></li>
+</ul>
+</li>
+</ul>
+<p>또한 핵심 Gazebo 라이브러리 내부에 있고 다운스트림 라이브러리에서 사용되지 않는 모든 것(예: 헤더 가드, 비공개 헤더 또는 소스, 테스트, 문서)은 hard-tock 처리됩니다.</p>
+<h3 id="untocks">Untocks</h3>
+<p>주로 이전 버전과의 호환성 이유(예: Fortress 지원)로 마이그레이션되지 않은 항목은 극소수입니다.</p>
+<ul>
+<li>Harmonic 이전 릴리스를 대상으로 하는 Gazebo 라이브러리 버전의 브랜치 이름<ul>
+<li>예: <code>ign-cmake2</code></li>
+</ul>
+</li>
+<li>일부 링크<ul>
+<li>예: <a href="https://osrf-migration.github.io/ignition-gh-pages">https://osrf-migration.github.io/ignition-gh-pages</a></li>
+</ul>
+</li>
+<li>Fuel 사용자 에이전트 관련<ul>
+<li>예: <code>X-Ign-Resource-Version</code>, <code>IgnitionFuelTools</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="migration">Migration</h2>
+<h3 id="overview_1">Overview</h3>
+<p>다음 마이그레이션 지침은 대부분의 일반적인 경우를 포괄해야 하는 패키지 마이그레이션 방법에 대한 지침 및 제안일 뿐입니다.</p>
+<p>모든 Ignition 대응 항목(<code>IGN</code>, <code>Ign</code>, <code>Ignition</code>, <code>ign</code>, <code>ignition</code>)을 Gazebo 대응 항목(<code>GZ</code>, <code>Gz</code>, <code>gz</code>)으로 바꾸는 가장 중요한 목표를 명심하십시오.</p>
+<h4 id="recommendations">Recommendations</h4>
+<p>크게 도움이 될 수 있는 것은 다음과 같습니다:</p>
+<ul>
+<li><code>regex</code> 및 <code>sed</code>를 충분히 활용하십시오<ul>
+<li>마이그레이션 가이드에서는 사용할 정규식 표현에 대한 제안을 제공하지만, <strong>바꾸기를 실행하기 전에 항상 검토하십시오</strong></li>
+</ul>
+</li>
+<li>대소문자에 주의하십시오!!</li>
+<li>편집기를 사용하여 변경 사항을 검토하고, 소스 제어를 사용하여 쉽게 롤백할 수 있도록 하십시오</li>
+<li>컴파일 경고/오류에 주의하십시오. 이는 일반적으로 (항상 그런 것은 아니지만) 무엇을 바꿔야 하는지에 대한 제안을 제공합니다!</li>
+<li>확실하지 않은 경우, <a href="https://github.com/gazebo-tooling/release-tools/issues/698">추적 이슈</a>에 나열된 변경 사항으로 변경 사항을 추적하십시오</li>
+</ul>
+<p>또한 Gazebo 스택을 소스에서 빌드하는 경우 깨끗하고 새로운 재빌드 및 설치를 수행해야 합니다.
+<code>build</code> 및 <code>install</code> 디렉토리를 삭제하고 <code>--merge-install</code>로 빌드를 실행하십시오.</p>
+<h4 id="gotchas">Gotchas</h4>
+<p>수행해야 할 마이그레이션 노력의 대부분은 주로 Ignition 관련 용어의 인스턴스를 찾아 Gazebo 관련 용어로 바꾸는 것입니다.</p>
+<p>그러나 마이그레이션을 처리하는 스크립트를 만드는 것을 어렵게 만드는 (오류 또는 버그로 이어지는) 많은 예외적인 경우가 있으므로 마이그레이션 단계를 제안하기 전에 이러한 경우 중 일부를 아는 것이 좋습니다.</p>
+<ul>
+<li>대소문자를 존중하지 않음<ul>
+<li>예: <code>IGNITION_ADD_PLUGIN</code> → <code>gz_ADD_PLUGIN</code></li>
+</ul>
+</li>
+<li>탐욕스러운 일치<ul>
+<li>예: <code>Align</code> → <code>Algz</code>, <code>unsigned</code> → <code>unsgzed</code>, <code>signal</code> → <code>sgzal</code></li>
+</ul>
+</li>
+<li>"gazebo"를 "sim"으로 마이그레이션하지 않음<ul>
+<li>예: <code>ign-gazebo</code> → <code>gz-gazebo</code> (이것은 <code>gz-sim</code>이어야 합니다)</li>
+</ul>
+</li>
+<li><code>ignition</code> 전에 <code>ign</code> 일치<ul>
+<li>예: <code>ignition-cmake3</code> → <code>gzition-cmake3</code></li>
+</ul>
+</li>
+<li>마이그레이션되어서는 안 되는 라이브러리 마이그레이션<ul>
+<li>예: <code>ignition-cmake2</code> → <code>gz-cmake2</code></li>
+</ul>
+</li>
+<li>문법<ul>
+<li>예: "an Ignition library" → "<strong>an</strong> Gazebo library"</li>
+</ul>
+</li>
+</ul>
+<p>또한 다음 동작에 유의하십시오:</p>
+<ul>
+<li>기존 설정 파일은 덮어쓰지 않으므로 이전 설정을 사용하거나 사용자 지정 위치에 설정 파일이 있는 경우, 설정 파일의 Ignition 대응 참조를 수동으로 마이그레이션하여 적절한 대응 항목을 가리키도록 해야 할 수 있습니다.</li>
+<li>
+<p>예를 들어, <code>gz-sim</code> 파일을 대상으로 하는 이전 설정 파일은 <code>ignition::gazebo::systems::Physics</code> 플러그인을 사용할 수 있습니다.
+    해당 참조가 아직 마이그레이션되지 않았기 때문에 사용 중단 경고가 발생할 수 있습니다.</p>
+</li>
+<li>
+<p>설치 공간이 변경되었으므로 <code>ignition</code>을 포함하는 하드 코딩된 위치가 있는 경우 <code>gz</code>로 마이그레이션해야 할 수 있습니다.</p>
+</li>
+</ul>
+<h3 id="migration-steps">Migration Steps</h3>
+<p>각 개별 섹션 내의 단계를 순서대로 실행하는 것이 중요합니다! 단계는 일반적으로 구체적인 것에서 일반적인 것으로 진행됩니다.</p>
+<h4 id="migrate-files-and-file-references">Migrate Files and File References</h4>
+<ol>
+<li>패키지 루트에서 <code>ign(ition)?[_|-]gazebo</code> (대소문자 구분 없음) 패턴과 일치하는 파일 및 디렉토리를 찾고, <code>ign</code> / <code>ignition</code>을 <code>gz</code>로, <code>gazebo</code>를 <code>sim</code>으로 적절하게 마이그레이션합니다.</li>
+<li>패키지 루트에서 <code>ign</code> / <code>ignition</code> (대소문자 구분 없음)이 있는 파일 및 디렉토리를 찾고, 대소문자를 일치시키면서 <code>gz</code>로 이동합니다.</li>
+<li>패키지 내에서 (1) 및 (2)의 마이그레이션된 파일 및 디렉토리에 대한 모든 내부 참조를 업데이트합니다.</li>
+</ol>
+<h4 id="migrate-cmake">Migrate CMake</h4>
+<p><code>CMakeLists.txt</code> 파일 (및 소스 파일의 참조!)에서:</p>
+<p><strong>Variables and macro/function calls</strong></p>
+<pre><code>Find: IGN(ITION)?_GAZEBO
+Replace: GZ_SIM
+
+Find: ign(ition)?_gazebo
+Replace: gz_sim
+
+Find: IGN(ITION)?_
+Replace: GZ_
+
+Find: ign(ition)?_
+Replace: gz_
+</code></pre>
+<p><strong>Includes</strong></p>
+<pre><code>Find: include\(Ign
+Replace: include(Gz
+
+Find: include\(ign
+Replace: include(gz
+
+Find: gz_find_package\(ign-
+Replace: gz_find_package(gz-
+
+Find: gz_find_package\(Ign(ition)?
+Replace: gz_find_package(Gz-
+</code></pre>
+<p><strong>Project Names</strong></p>
+<pre><code>Find: ignition-gazebo
+Replace: gz-sim
+
+Find: ignition-
+Replace: gz-
+</code></pre>
+<p><strong>참고:</strong> 때때로 CMake 인수가 소스 파일로 전달되므로 해당 인수도 적절하게 마이그레이션해야 합니다.</p>
+<h4 id="migrate-macros-and-environment-variables">Migrate Macros and Environment Variables</h4>
+<ul>
+<li><a href="https://github.com/gazebo-tooling/release-tools/issues/734">환경 변수 마이그레이션의 유용한 목록</a></li>
+<li><a href="https://github.com/gazebo-tooling/release-tools/issues/737">매크로 마이그레이션의 유용한 목록</a> (토글된 드롭다운 블록 참조, 일부는 건너뜁니다!)</li>
+</ul>
+<p>소스 매크로 및 환경 변수 마이그레이션</p>
+<pre><code>Find: IGN(ITION)?_GAZEBO
+Replace: GZ_SIM
+
+Find: ign(ition)?_gazebo
+Replace: gz_sim
+
+Find: IGN(ITION)?_
+Replace: GZ_
+
+Find: ign(ition)?_
+Replace: gz_
+</code></pre>
+<p>환경 변수의 경우 매크로와 동일한 접근 방식을 사용할 수 있지만 환경 변수에 저장된 값(예: 경로)에 주의하십시오!</p>
+<p>또한 로깅 매크로도 마이그레이션되었습니다! 사용 부분을 마이그레이션하십시오!</p>
+<ul>
+<li><code>ignerr</code> -&gt; <code>gzerr</code></li>
+<li><code>ignwarn</code> -&gt; <code>gzwarn</code></li>
+<li><code>ignmsg</code> -&gt; <code>gzmsg</code></li>
+<li><code>igndbg</code> -&gt; <code>gzdbg</code></li>
+<li><code>ignlog</code> -&gt; <code>gzlog</code></li>
+<li><code>ignLogInit</code> -&gt; <code>gzLogInit</code></li>
+<li><code>ignLogClose</code> -&gt; <code>gzLogClose</code></li>
+<li><code>ignLogDirectory</code> -&gt; <code>gzLogDirectory</code></li>
+</ul>
+<h4 id="migrate-sdf">Migrate SDF</h4>
+<p><code>.sdf</code> 파일에서:</p>
+<pre><code>Find: &lt;ignition
+Replace: &lt;gz
+
+Find: &lt;/ignition
+Replace: &lt;/gz
+
+Find: ignition:
+Replace: gz:
+</code></pre>
+<p>몇 가지 예:</p>
+<ul>
+<li><code>&lt;gz:odometer</code></li>
+<li><code>&lt;gz-gui</code></li>
+</ul>
+<h4 id="migrate-plugins-and-shared-libraries">Migrate Plugins and Shared Libraries</h4>
+<p>플러그인 파인더는 파일 이름에서 <code>lib</code> 및 <code>.so</code>가 제거된 경우에도 플러그인을 찾을 수 있습니다.</p>
+<p><code>.sdf</code> 파일 및 소스 파일 (예: <code>.cc</code>)에서:</p>
+<pre><code>Find: (lib)?ign(ition)?-gazebo([^. ]*)\.so
+Replace: gz-sim\3
+
+Find: (lib)?ign(ition)?([^. ]*)\.so
+Replace: gz\3
+
+Find: ignition::gazebo
+Replace: gz::sim
+
+Find: ignition::
+Replace: gz::
+</code></pre>
+<h4 id="migrate-bindings">Migrate Bindings</h4>
+<p>Python 파일 (예: <code>.py</code>)에서</p>
+<pre><code>Find: ignition.gazebo
+Replace: gz.sim
+
+Find: ignition.
+Replace: gz.
+</code></pre>
+<p>Ruby 파일 (예: <code>.i</code>, <code>.rb</code>)에서</p>
+<pre><code>Find: ign(ition)?/
+Replace: gz/
+</code></pre>
+<h4 id="migrate-messages">Migrate Messages</h4>
+<p>메시지 정의에서</p>
+<pre><code>Find: ign(ition)?\.gazebo
+Replace: gz.sim
+
+Find: ign(ition)?/gazebo
+Replace: gz/sim
+
+Find: ign(ition)?\.
+Replace: gz.
+
+Find: ign(ition)?/
+Replace: gz/
+</code></pre>
+<h4 id="migrate-headers-and-sources">Migrate Headers and Sources</h4>
+<p>모든 곳에서 전면적인 검사 (이들을 검토하는 데 특별히 주의하십시오!)</p>
+<p><strong>Headers</strong></p>
+<pre><code>Find: #include\s*([&lt;&quot;])ign(ition)?/gazebo
+Replace: #include \1gz/sim
+
+Find: #include\s*([&lt;&quot;])ign(ition)?/
+Replace: #include \1gz/
+
+// Note: You should be wary of the IGNITION GAZEBO case for the following
+// and adjust accordingly
+Find: #([^\s]*)\s+(.*)IGN(?:ITION)?_(.*)_(H+)_(.*)$
+Replace: #$1 $2GZ_$3_$4_$5
+
+Find: #endif\s*// GZ(.*)_H
+Replace: #endif  // GZ$1_H
+</code></pre>
+<p><strong>Namespaces</strong></p>
+<pre><code>Find: namespace\s*ignition
+Replace: namespace gz
+
+Find: namespace\s*gazebo
+Replace: namespace sim
+
+Find: ignition::gazebo
+Replace: gz::sim
+
+Find: Ignition::Gazebo
+Replace: Gz::Sim
+
+Find: ignition::
+Replace: gz::
+
+Find: Ignition::
+Replace: Gz::
+</code></pre>
+<p><strong>Everything Else</strong></p>
+<p>수동으로 검사하고 싶을 수 있습니다:</p>
+<ul>
+<li><code>Ign</code></li>
+<li><code>ignition</code></li>
+</ul>
+<p>또한 <code>gazebo</code>의 특정 인스턴스(일반적으로 API의 일부)는 대신 <code>sim</code>을 사용해야 한다는 점에 유의하십시오.</p>
+<h4 id="migrate-your-cli-usage">Migrate Your CLI Usage</h4>
+<p>이전에 사용했던 곳:</p>
+<pre><code>ign gazebo shapes.sdf
+</code></pre>
+<p>이제 다음을 사용해야 합니다:</p>
+<pre><code>gz sim shapes.sdf
+</code></pre>
+<p><code>gazebo</code> 동사는 <strong>사용 중단(deprecated)</strong>되었습니다.</p>
+<h4 id="helpful-cli-redirection">Helpful CLI Redirection</h4>
+<p><code>Harmonic</code>과 <code>Fortress</code>의 병렬 설치를 지원하기 위해 <code>ign</code> CLI 실행 파일(및 <code>gazebo</code> 동사)은 <code>Harmonic</code>용으로 설치되지 않습니다.
+이는 <code>Fortress</code>가 <code>Harmonic</code>과 함께 설치되지 않는 한 CLI 사용을 마이그레이션해야 함을 의미합니다.
+<code>ign</code> 대신 <code>gz</code>를 사용하고 <code>gazebo</code> 대신 <code>sim</code>을 사용하십시오.</p>
+<p>다음 스크립트를 <code>~/.bashrc</code> 파일에 추가하여 모든 <code>ign</code> 호출을 <code>gz</code>로 리디렉션할 수 있으므로 모든 스크립트(아직 <code>ign</code>을 사용 중인)를 마이그레이션할 필요는 없지만, 마이그레이션을 수행하는 것이 여전히 권장됩니다.</p>
+<pre><code class="language-shell">ign() {
+  if which ign &amp;&gt; /dev/null; then
+    $(which ign) &quot;$@&quot;
+  else
+    if which gz &amp;&gt; /dev/null; then
+      echo &quot;[DEPRECATED] ign is deprecated! Please use gz instead!&quot;
+      if [ &quot;$1&quot; = &quot;gazebo&quot; ]; then
+        echo &quot;[DEPRECATED] The gazebo verb is deprecated! Please use sim instead!&quot;
+        shift
+        $(which gz) sim &quot;$@&quot;
+      else
+        $(which gz) &quot;$@&quot;
+      fi
+    else
+      echo &quot;[ERROR] It seems like you don't have Gazebo installed!&quot;
+      return 1
+    fi
+  fi
+}
+</code></pre>
+<h3 id="double-check">Double-Check</h3>
+<p>남아있는 것이나 잘못 마이그레이션된 인스턴스가 있는지 확인하는 데 유용할 수 있습니다.</p>
+<p>이들을 <strong>대소문자 구분 없이</strong> 일치시켜야 합니다.</p>
+<p><strong>Errors</strong></p>
+<ul>
+<li><code>gz-gazebo</code></li>
+<li><code>gzition</code></li>
+<li><code>an gz</code></li>
+</ul>
+<p><strong>Remaining Ign</strong></p>
+<ul>
+<li><code>\.ign(ition)?</code></li>
+<li><code>ign(ition)?[-_]</code></li>
+</ul>
+<h2 id="additional-packages">Additional Packages</h2>
+<p>이 섹션에서는 다른 일부 Gazebo 관련 패키지에서 발생한 변경 사항을 자세히 설명합니다.</p>
+<h3 id="ros_gz">ros_gz</h3>
+<p><code>ros_ign</code>이 <code>ros_gz</code>로 이름이 변경되었습니다.
+Harmonic 이전 버전의 Gazebo가 의존하지 않는 <code>ign</code> 또는 <code>ignition</code>에 대한 모든 내부 참조가 마이그레이션되었습니다.</p>
+<p>사용자 지정 sim 버전 또는 sim 인수로 <code>ros_gz</code> 데모를 실행하려면 <code>gz_version</code> 및 <code>gz_args</code> 시작 매개변수를 사용하십시오.
+<code>ign_version</code> 시작 매개변수를 사용하는 경우 <code>ign_args</code> 시작 매개변수도 명시적으로 설정해야 합니다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/gazebosim/gz-sim" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+    
+  </body>
+</html>

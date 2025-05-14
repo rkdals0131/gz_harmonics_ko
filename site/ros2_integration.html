@@ -1,0 +1,1368 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Harmonic Documentation">
+      
+      
+        <meta name="author" content="B1ackburn">
+      
+      
+        <link rel="canonical" href="http://localhost:8000/ros2_integration.html">
+      
+      
+        <link rel="prev" href="ros2_launch_gazebo.html">
+      
+      
+        <link rel="next" href="ros2_spawn_model.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.13">
+    
+    
+      
+        <title>Use ROS 2 to interact with Gazebo - Gazebo Harmonic Kr</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#use-ros-2-to-interact-with-gazebo" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Gazebo Harmonic Kr" class="md-header__button md-logo" aria-label="Gazebo Harmonic Kr" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gazebo Harmonic Kr
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Use ROS 2 to interact with Gazebo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Gazebo Harmonic Kr" class="md-nav__button md-logo" aria-label="Gazebo Harmonic Kr" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Gazebo Harmonic Kr
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Install
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Harmonic installation instructions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_ubuntu.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary Ubuntu Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_osx.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary macOS Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_windows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary Windows Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_ubuntu_src.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ubuntu Source Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_osx_src.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    macOS Source Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_windows_src.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows Source Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="troubleshooting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="migration_from_ignition.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migration from Ignition
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="comparison.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Feature Comparison
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorials Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="building_robot.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Building your own robot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="moving_robot.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Moving the robot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sdf_worlds.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDF worlds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sensors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="actors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Actors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="GUI_tutorial.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Understanding the GUI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manipulating_models.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulating Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Model_insertion_fuel.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model Insertion from Fuel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="hotkeys.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Keyboard Shortcuts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spawn_urdf.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spawn URDF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ROS 2 integration overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_launch_gazebo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Launch Gazebo from ROS 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Use ROS 2 to interact with Gazebo
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="ros2_integration.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use ROS 2 to interact with Gazebo
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ros_gz_bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      ros_gz_bridge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launching-the-bridge-manually" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launching the bridge manually
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launching-the-bridge-using-the-launch-files-included-in-ros_gz_bridge-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launching the bridge using the launch files included in ros_gz_bridge package.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launching-the-bridge-from-a-custom-launch-file-in-xml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launching the bridge from a custom launch file in XML.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launching-the-bridge-from-a-custom-launch-file-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launching the bridge from a custom launch file in Python.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-key-strokes-to-ros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publish key strokes to ROS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#video-walk-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      Video walk-through
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-in-rviz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualize in RViz
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_spawn_model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use ROS 2 to spawn a Gazebo model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_interop.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ROS 2 interoperability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros_gz_project_template_guide.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ROS 2 integration template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ros_gz_bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      ros_gz_bridge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launching-the-bridge-manually" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launching the bridge manually
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launching-the-bridge-using-the-launch-files-included-in-ros_gz_bridge-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launching the bridge using the launch files included in ros_gz_bridge package.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launching-the-bridge-from-a-custom-launch-file-in-xml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launching the bridge from a custom launch file in XML.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launching-the-bridge-from-a-custom-launch-file-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launching the bridge from a custom launch file in Python.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-key-strokes-to-ros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publish key strokes to ROS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#video-walk-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      Video walk-through
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-in-rviz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualize in RViz
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="use-ros-2-to-interact-with-gazebo">Use ROS 2 to interact with Gazebo</h1>
+<p>이 튜토리얼에서는 ROS 2를 사용하여 Gazebo와 통신하는 방법을 배웁니다.
+이는 여러 측면에서 도움이 될 수 있습니다. ROS로부터 데이터(예: 조인트 상태, TF)를 수신하거나 명령을 받아 Gazebo에 적용할 수 있으며, 그 반대도 가능합니다. 또한 RViz가 Gazebo 월드에서 동시에 시뮬레이션되는 로봇 모델을 시각화하는 데 도움이 될 수 있습니다.</p>
+<h2 id="ros_gz_bridge">ros_gz_bridge</h2>
+<p><a href="https://github.com/gazebosim/ros_gz"><code>ros_gz_bridge</code></a>는 ROS 2와 <a href="https://github.com/gazebosim/gz-transport">Gazebo Transport</a> 간의 메시지 교환을 가능하게 하는 네트워크 브리지를 제공합니다. 지원은 특정 메시지 유형으로 제한됩니다. 사용하려는 메시지 유형이 브리지에서 지원되는지 확인하려면 이 <a href="https://github.com/gazebosim/ros_gz/blob/jazzy/ros_gz_bridge/README.md">README</a>를 확인하십시오.</p>
+<p>브리지 사용 예제는 <a href="https://github.com/gazebosim/ros_gz/tree/ros2/ros_gz_sim_demos"><code>ros_gz_sim_demos</code></a>에서 찾을 수 있으며, 여기에는 모든 주요 액추에이션 및 센서 유형의 브리징을 포함한 데모 실행 파일이 포함되어 있습니다.</p>
+<h2 id="launching-the-bridge-manually">Launching the bridge manually</h2>
+<p>양방향 브리지를 초기화하여 ROS를 게시자로, Gazebo를 구독자로 사용하거나 그 반대로 사용할 수 있습니다. 구문은 <code>/TOPIC@ROS_MSG@GZ_MSG</code>이며, 여기서 <code>TOPIC</code>은 Gazebo 내부 토픽, <code>ROS_MSG</code>는 이 토픽에 대한 ROS 메시지 유형, <code>GZ_MSG</code>는 Gazebo 메시지 유형입니다.</p>
+<p>예를 들어:</p>
+<pre><code>ros2 run ros_gz_bridge parameter_bridge /scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan
+</code></pre>
+<p><code>ros2 run ros_gz_bridge parameter_bridge</code> 명령어는 <code>ros_gz_bridge</code> 패키지의 <code>parameter_bridge</code> 코드를 실행합니다. 그런 다음 메시지가 전송될 토픽 <code>/TOPIC</code>을 지정합니다. 첫 번째 <code>@</code> 기호는 토픽 이름을 메시지 유형과 구분합니다. 첫 번째 <code>@</code> 기호 다음에는 ROS 메시지 유형이 옵니다.</p>
+<p>ROS 메시지 유형 다음에는 <code>@</code>, <code>[</code>, 또는 <code>]</code> 기호가 오며, 여기서:</p>
+<ul>
+<li><code>@</code>는 양방향 브리지입니다.</li>
+<li><code>[</code>는 Gazebo에서 ROS로의 브리지입니다.</li>
+<li><code>]</code>는 ROS에서 Gazebo로의 브리지입니다.</li>
+</ul>
+<p>ROS에서 Gazebo로, 또는 그 반대로 통신 연결을 만드는 방법을 설명하는 다음 <a href="https://github.com/gazebosim/ros_gz/blob/jazzy/ros_gz_bridge/README.md#example-1a-gazebo-transport-talker-and-ros-2-listener">예제들</a>을 살펴보십시오.</p>
+<p>또한 ROS Launch를 <code>ros_gz_bridge</code>와 함께 사용하고, 토픽을 yaml 형식으로 표현하여 실행 시 브리지에 제공할 수도 있습니다.</p>
+<pre><code class="language-yaml">- ros_topic_name: &quot;scan&quot;
+  gz_topic_name: &quot;/scan&quot;
+  ros_type_name: &quot;sensor_msgs/msg/LaserScan&quot;
+  gz_type_name: &quot;gz.msgs.LaserScan&quot;
+  direction: GZ_TO_ROS  # BIDIRECTIONAL or ROS_TO_GZ
+</code></pre>
+<p>설정 파일은 브리지될 ROS와 Gazebo 토픽 간의 매핑을 포함하는 YAML 파일입니다. 브리지될 각 토픽 쌍에 대해 다음 매개변수가 허용됩니다:</p>
+<ul>
+<li><code>ros_topic_name</code>: ROS 측의 토픽 이름.</li>
+<li><code>gz_topic_name</code>: Gazebo 측의 해당 토픽 이름.</li>
+<li><code>ros_type_name</code>: 이 ROS 토픽의 유형.</li>
+<li><code>gz_type_name</code>: 이 Gazebo 토픽의 유형.</li>
+<li><code>subscriber_queue</code>: ROS 구독자 큐 크기.</li>
+<li><code>publisher_queue</code>: ROS 게시자 큐 크기.</li>
+<li><code>lazy</code>: 지연 구독자가 있는지 여부. 실제 구독자가 없으면 브리지는 내부 구독자도 생성하지 않습니다. 이는 성능을 향상시킬 것입니다.</li>
+<li><code>direction</code>: <code>GZ_TO_ROS</code>, <code>ROS_TO_GZ</code> 및 <code>BIDIRECTIONAL</code>을 지정할 수 있습니다.</li>
+</ul>
+<p>유효한 설정 파일의 예는 <a href="https://github.com/gazebosim/ros_gz/blob/jazzy/ros_gz_bridge/test/config/full.yaml">이 예제</a>를 참조하십시오.</p>
+<h2 id="launching-the-bridge-using-the-launch-files-included-in-ros_gz_bridge-package">Launching the bridge using the launch files included in <code>ros_gz_bridge</code> package.</h2>
+<p><code>ros_gz_bridge</code> 패키지에는 <code>ros_gz_bridge.launch.py</code>라는 이름의 launch 파일이 포함되어 있습니다. 이를 사용하여 ROS 2와 Gazebo 브리지를 시작할 수 있습니다.</p>
+<p>다음은 예제입니다:</p>
+<pre><code class="language-bash">ros2 launch ros_gz_bridge ros_gz_bridge.launch.py bridge_name:=ros_gz_bridge config_file:=&lt;path_to_your_YAML_file&gt;
+</code></pre>
+<p>컴포지션으로 실행하기:</p>
+<pre><code class="language-bash">ros2 launch ros_gz_bridge ros_gz_bridge.launch.py bridge_name:=ros_gz_bridge config_file:=&lt;path_to_your_YAML_file&gt; use_composition:=True create_own_container:=True
+</code></pre>
+<p>또는 기존 컨테이너가 이미 실행 중인 경우, <code>container_name</code> 매개변수를 사용하여 브리지를 시작할 때 해당 이름을 전달할 수 있습니다. 컴포지션에 대한 자세한 정보는 <a href="ros2_overview.html#composition">여기</a>에서 볼 수 있습니다.</p>
+<p>이 launch 파일에서 허용하는 모든 다른 매개변수를 알아보려면 소스 코드의 <a href="https://github.com/gazebosim/ros_gz/blob/jazzy/ros_gz_bridge/launch/ros_gz_bridge.launch.py#L25-L68">이 블록</a>을 확인하십시오.</p>
+<p>QOS 재정의:</p>
+<p>QOS 재정의는 launch 파일의 <code>bridge_params</code> 인수를 사용하여 브리지에 추가 매개변수로 전달할 수 있습니다. 다음은 예시입니다:</p>
+<pre><code class="language-bash">ros2 launch ros_gz_bridge ros_gz_bridge.launch.py bridge_name:=ros_gz_bridge config_file:=&lt;path_to_your_YAML_file&gt; bridge_params:={'qos_overrides./topic_name.publisher.durability': 'transient_local', 'qos_overrides./another_topic_name.publisher.durability': 'transient_local'}
+</code></pre>
+<p><code>bridge_params</code>에 전달하는 내용에서 다음을 생략할 수 있습니다: <code>{}</code>, <code></code>, <code>"</code>, <code>'</code>.</p>
+<p>QOS 재정의 사용에 대한 자세한 정보는 <a href="https://docs.ros.org/en/jazzy/How-To-Guides/Overriding-QoS-Policies-For-Recording-And-Playback.html#using-qos-overrides">여기</a>에서 찾을 수 있습니다.</p>
+<h2 id="launching-the-bridge-from-a-custom-launch-file-in-xml">Launching the bridge from a custom launch file in XML.</h2>
+<p>사용자 지정 launch 파일에서 브리지를 트리거할 수도 있습니다. 이를 위해 XML 또는 YAML launch 파일에서 사용할 수 있는 <code>&lt;ros_gz_bridge/&gt;</code> 태그를 만들었습니다. 이 경우 인수는 이 태그 내의 속성으로 전달됩니다. 다음은 단순화된 예이며, 더 포괄적인 예는 <a href="https://github.com/gazebosim/ros_gz/blob/ros2/ros_gz_bridge/launch/ros_gz_bridge.launch">여기</a>에서 볼 수 있습니다:</p>
+<pre><code class="language-xml">&lt;launch&gt;
+  &lt;arg name=&quot;bridge_name&quot; /&gt;
+  &lt;arg name=&quot;config_file&quot; /&gt;
+  &lt;ros_gz_bridge
+    bridge_name=&quot;$(var bridge_name)&quot;
+    config_file=&quot;$(var config_file)&quot;&gt;
+  &lt;/ros_gz_bridge&gt;
+&lt;/launch&gt;
+</code></pre>
+<p>이 경우 <code>&lt;ros_gz_bridge&gt;</code> 매개변수는 명령줄에서 읽습니다. 이는 옵션이지만, 일부 값을 하드코딩하거나 모든 매개변수를 사용하지 않기로 결정할 수 있으므로 반드시 필요한 것은 아닙니다.</p>
+<h2 id="launching-the-bridge-from-a-custom-launch-file-in-python">Launching the bridge from a custom launch file in Python.</h2>
+<p>다음은 Python에서 브리지를 로드하는 데 사용되는 Python launch 파일의 단순화된 예입니다. 더 포괄적인 예는 <a href="https://github.com/gazebosim/ros_gz/blob/ros2/ros_gz_bridge/launch/ros_gz_bridge.launch.py">여기</a>에서 볼 수 있습니다:</p>
+<pre><code class="language-python">from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration, TextSubstitution
+from ros_gz_bridge.actions import RosGzBridge
+
+
+def generate_launch_description():
+
+    bridge_name = LaunchConfiguration('bridge_name')
+    config_file = LaunchConfiguration('config_file')
+
+    declare_bridge_name_cmd = DeclareLaunchArgument(
+        'bridge_name', description='Name of ros_gz_bridge node'
+    )
+
+    declare_config_file_cmd = DeclareLaunchArgument(
+        'config_file', description='YAML config file'
+    )
+
+    # Create the launch description and populate
+    ld = LaunchDescription([
+        RosGzBridge(
+            bridge_name=LaunchConfiguration('bridge_name'),
+            config_file=LaunchConfiguration('config_file'),
+        ),
+    ])
+
+    # Declare the launch options
+    ld.add_action(declare_bridge_name_cmd)
+    ld.add_action(declare_config_file_cmd)
+
+    return ld
+</code></pre>
+<h2 id="publish-key-strokes-to-ros">Publish key strokes to ROS</h2>
+<p><code>Key Publisher</code> Gazebo 플러그인을 사용하여 ROS로 메시지를 보내 봅시다.</p>
+<p><strong>참고:</strong> 필요한 모든 작업 공간(ROS, Gazebo 및 <code>ros_gz</code>...)이 소싱되었는지 확인하십시오.</p>
+<p>먼저 <code>Key Publisher</code> 플러그인이 메시지를 보내는 토픽과 메시지 유형을 지정하여 ROS와 Gazebo 간의 브리지를 시작합니다:</p>
+<pre><code>ros2 run ros_gz_bridge parameter_bridge /keyboard/keypress@std_msgs/msg/Int32@gz.msgs.Int32
+</code></pre>
+<p><code>/keyboard/keypress</code> 토픽에 <code>Int32</code> 유형의 메시지를 사용하는 브리지를 시작했습니다.
+ROS의 경우 <code>std_msgs/msg/Int32</code>이고 Gazebo의 경우 <code>gz.msgs.Int32</code>입니다.</p>
+<p>다른 터미널에서 Gazebo Sim 월드를 실행합니다. 예를 들어 <code>empty.sdf</code> 월드입니다:</p>
+<pre><code>gz sim empty.sdf
+</code></pre>
+<p>그런 다음 오른쪽 상단 드롭다운 메뉴에서 <code>Key Publisher</code> 플러그인을 추가합니다.</p>
+<p><img alt="empty_world_with_KeyPublisher" src="tutorials/ros2_integration/empty_world.png" /></p>
+<p>다른 터미널에서 ROS 리스너를 시작합니다:</p>
+<pre><code>ros2 topic echo /keyboard/keypress
+</code></pre>
+<p>이 명령은 <code>/keyboard/keypress</code> 토픽을 통해 전송된 메시지를 수신합니다.</p>
+<p>Gazebo 창에서 키보드 키를 누르면 리스너 터미널에 데이터가 표시됩니다.</p>
+<p>이제 여러분의 차례입니다! ROS에서 Gazebo로 데이터를 전송해 보세요. 다른 데이터 유형과 다른 통신 방향을 시도해 볼 수도 있습니다.</p>
+<h2 id="video-walk-through">Video walk-through</h2>
+<p>이 튜토리얼의 비디오 연습은 YouTube 채널에서 볼 수 있습니다: <a href="https://youtu.be/IpZTNyTp9t8">Gazebo tutorials: ROS 2 Foxy integration</a>.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/IpZTNyTp9t8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="visualize-in-rviz">Visualize in RViz</h2>
+<p>한 단계 더 나아가 <a href="https://github.com/gazebosim/ros_gz/tree/jazzy/ros_gz_sim_demos"><code>ros_gz_sim_demos</code></a>의 데모를 시도해 보세요.</p>
+<p><code>sdf_parser</code> 데모의 경우, colcon 작업 공간에 <a href="https://github.com/gazebosim/ros_gz/tree/jazzy"><code>ros_gz</code></a>와 파서 플러그인 <code>sdformat_urdf</code>를 소스에서 설치하십시오.
+<code>sdformat_urdf</code>에 대한 자세한 내용은 <a href="https://github.com/ros/sdformat_urdf/blob/jazzy/sdformat_urdf/README.md">여기</a>에서 읽어보십시오.</p>
+<p>rviz 실행 인수가 설정된 상태로 데모 launch 파일을 실행합니다:</p>
+<pre><code class="language-bash">ros2 launch ros_gz_sim_demos sdf_parser.launch.py rviz:=True
+</code></pre>
+<p>Gazebo에서 시뮬레이션을 시작하고 TF가 게시될 때까지 몇 초 기다립니다.</p>
+<p>다른 터미널에서 차량이 원을 그리며 움직이도록 ROS 또는 Gazebo 명령을 보냅니다:</p>
+<pre><code class="language-bash">gz topic -t &quot;/model/vehicle/cmd_vel&quot; -m gz.msgs.Twist -p &quot;linear: {x: 1.0}, angular: {z: -0.1}&quot;
+ros2 topic pub /model/vehicle/cmd_vel geometry_msgs/msg/Twist &quot;{linear: {x: 5.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: -0.1}}
+</code></pre>
+<p>Gazebo와 RViz에서 차량의 궤적이 일치하는지 확인합니다.</p>
+<p><img alt="gz_rviz" src="tutorials/ros2_integration/gz_rviz.gif" /></p>
+<p>이 데모 구현에 대한 자세한 내용은 <a href="ros2_interop">ROS 2 Interoperability</a>를 참조하십시오.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/gazebosim/gz-sim" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+    
+  </body>
+</html>

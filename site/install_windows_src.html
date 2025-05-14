@@ -1,0 +1,1396 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Harmonic Documentation">
+      
+      
+        <meta name="author" content="B1ackburn">
+      
+      
+        <link rel="canonical" href="http://localhost:8000/install_windows_src.html">
+      
+      
+        <link rel="prev" href="install_osx_src.html">
+      
+      
+        <link rel="next" href="troubleshooting.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.13">
+    
+    
+      
+        <title>Windows Source Install - Gazebo Harmonic Kr</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#source-installation-on-windows-10-or-11" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Gazebo Harmonic Kr" class="md-header__button md-logo" aria-label="Gazebo Harmonic Kr" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gazebo Harmonic Kr
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Windows Source Install
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Gazebo Harmonic Kr" class="md-nav__button md-logo" aria-label="Gazebo Harmonic Kr" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Gazebo Harmonic Kr
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Install
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Harmonic installation instructions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_ubuntu.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary Ubuntu Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_osx.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary macOS Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_windows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Binary Windows Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_ubuntu_src.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ubuntu Source Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install_osx_src.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    macOS Source Install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Windows Source Install
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="install_windows_src.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows Source Install
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install dependencies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-gazebo-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building the Gazebo Libraries
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the workspace
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using the workspace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gazebo-gui-workaround" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gazebo GUI workaround
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstalling-source-based-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uninstalling source-based install
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="troubleshooting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="migration_from_ignition.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migration from Ignition
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="comparison.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Feature Comparison
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorials Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="building_robot.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Building your own robot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="moving_robot.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Moving the robot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sdf_worlds.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDF worlds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sensors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sensors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="actors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Actors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="GUI_tutorial.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Understanding the GUI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Manipulating_models.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulating Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Model_insertion_fuel.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model Insertion from Fuel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="hotkeys.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Keyboard Shortcuts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spawn_urdf.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spawn URDF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ROS 2 integration overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_launch_gazebo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Launch Gazebo from ROS 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_integration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use ROS 2 to interact with Gazebo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_spawn_model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use ROS 2 to spawn a Gazebo model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros2_interop.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ROS 2 interoperability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ros_gz_project_template_guide.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ROS 2 integration template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install dependencies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-gazebo-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building the Gazebo Libraries
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the workspace
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using the workspace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gazebo-gui-workaround" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gazebo GUI workaround
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstalling-source-based-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uninstalling source-based install
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="warning">
+WARNING: Current Windows support is experimental.
+</div>
+
+<h1 id="source-installation-on-windows-10-or-11">Source Installation on Windows 10 or 11</h1>
+<p>OGRE2 rendering capabilities are supported in Windows, and Gazebo GUI
+works in a limited fashion. These functionalities correspond to the currently
+building packages <code>gz-rendering</code> and <code>gz-sim</code>, respectively. The packages will build,
+without any failures when using their functionalities.</p>
+<blockquote>
+<p><strong>NOTE</strong>
+You should be able to use <code>ogre</code> as a rendering engine instead of the default <code>ogre2</code>.
+Just append <code>--render-engine ogre</code> to the command line.</p>
+</blockquote>
+<h2 id="install-dependencies">Install dependencies</h2>
+<ol>
+<li>
+<p>If you do not have the conda package manager installed in your system, install a conda distribution.
+   As Gazebo uses all dependencies from the conda-forge channel, we suggest to install miniforge following <a href="https://github.com/conda-forge/miniforge#windows">the official miniforge installation docs</a> by executing the following commands in a "Command Prompt" terminal:
+   <code>cmd
+   curl.exe -L -O https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe
+   start /wait "" Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
+   %UserProfile%\Miniforge3\condabin\conda init
+   %UserProfile%\Miniforge3\condabin\conda config --set auto_activate_base false
+   del Miniforge3-Windows-x86_64.exe</code>
+   If you followed this step correctly, you should be able to access <code>conda</code> in any new "Command Prompt" terminal you open.
+   To verify that, check that if you open a new terminal and execute <code>conda info</code>, the output begins with:
+   <code>cmd
+     active environment : None
+            shell level : 0
+     [..]</code></p>
+</li>
+<li>
+<p>Install <a href="https://visualstudio.microsoft.com/downloads/">Visual Studio 2019 or 2022</a>.
+   The Community version is free for students, open-source developers, and personal
+   development. Check "Desktop development with C++" in the Workloads tab,
+   check "MFC and ATL support", and uncheck "C++ Cmake Tools." We will install
+   cmake via Conda. All other checkboxes can be left unchecked.</p>
+</li>
+<li>
+<p>Open a Visual Studio Command Prompt (search for "x64 Native Tools Command Prompt
+   for VS" in the Windows search field near the Windows button) or Developer PowerShell
+   for VS (search for "developer powershell"). Optionally,
+   right-click and pin to the task bar for quick access in the future.</p>
+</li>
+</ol>
+<p>If you chose PowerShell, you need to do a few steps to be able to use Conda and Gazebo in it:
+   <code>bash
+   conda init powershell
+   # Restart the PowerShell
+   Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser</code></p>
+<ol>
+<li>Create and activate a Conda environment:
+   <code>bash
+   conda create -n gz-ws
+   conda activate gz-ws</code>
+   Once you have activated an environment, a prefix like <code>(gz-ws)</code> will be prepended to
+   your prompt.</li>
+</ol>
+<p>You can use <code>conda info --envs</code> to see all of your environments.</p>
+<p>To speed up conda installations, also set the following to use libmamba solver.
+   Older conda installations may need to do <a href="https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community">additional steps</a>.
+   <code>bash
+   conda config --set solver libmamba</code>
+   To remove an environment, use <code>conda remove --all --name &lt;env_name&gt;</code>.</p>
+<blockquote>
+<p><strong>NOTE</strong>
+This way of Conda environment creation puts it into a default folder. If you need
+     to install it elsewhere, use <code>--prefix &lt;env_path&gt;</code> instead of <code>--name &lt;env_name&gt;</code>.
+     Environments in custom paths cannot be referenced by names, so even <code>conda activate</code>
+     needs to be passed a path (relative or absolute) instead of the name. If you refer
+     to a subdirectory of the current directory, you have to prepend <code>.\</code> so that Conda
+     knows it is a path and not a name.</p>
+</blockquote>
+<ol>
+<li>
+<p>Install dependencies:
+   <code>bash
+   conda install cmake git vcstool curl pkg-config ^
+   colcon-common-extensions dartsim eigen freeimage gdal gts ^
+   glib dlfcn-win32 ffmpeg ruby tinyxml2 tinyxml ^
+   protobuf urdfdom zeromq cppzmq ogre=1.10 ogre-next jsoncpp ^
+   libzip qt pybind11 boost --channel conda-forge</code>
+   This can take tens of minutes (or less when using libmamba solver).</p>
+</li>
+<li>
+<p>Navigate to where you would like to build the library, create and enter your workspace directory,
+   create the <code>src</code> directory which will contain the Gazebo source code.
+   <code>bash
+   mkdir gz-ws
+   cd gz-ws
+   mkdir src</code></p>
+</li>
+<li>
+<p>Then clone the repositories
+   ```bash
+   # CMD
+   curl -sk https://raw.githubusercontent.com/gazebo-tooling/gazebodistro/master/collection-harmonic.yaml -o collection-harmonic
+   vcs import src &lt; collection-harmonic</p>
+</li>
+</ol>
+<p># PowerShell
+   curl https://raw.githubusercontent.com/gazebo-tooling/gazebodistro/master/collection-harmonic.yaml -o collection-harmonic
+   vcs import --input collection-harmonic src
+   ```</p>
+<h2 id="building-the-gazebo-libraries">Building the Gazebo Libraries</h2>
+<p>Once the compiler and all the sources are in place it is time to compile them.
+Start the procedure by navigating to your workspace and listing the packages
+recognized by <code>colcon</code>:</p>
+<pre><code class="language-bash">colcon graph
+</code></pre>
+<p><code>colcon graph</code> should list the Gazebo libraries with an
+<a href="https://colcon.readthedocs.io/en/released/reference/verb/graph.html#example-output">interdependency diagram</a>.
+If that is the case, then you are ready to build the whole set of libraries:</p>
+<pre><code class="language-bash">colcon build --cmake-args -DBUILD_TESTING=OFF -DSKIP_SWIG=ON --merge-install --packages-up-to gz-sim8 gz-tools2
+</code></pre>
+<p>Tests are turned off as they are not currently supported on Windows.</p>
+<p>To build a specific package with all its dependent packages:</p>
+<pre><code class="language-bash">colcon build --merge-install --packages-up-to PACKAGE_NAME
+</code></pre>
+<p>To build a single package:</p>
+<pre><code class="language-bash">colcon build --packages-select PACKAGE_NAME
+</code></pre>
+<p>Visit <a href="https://colcon.readthedocs.io/en/released/#">colcon documentation</a> to view more <code>colcon</code> build and test options.</p>
+<p>If there are no errors, all the binaries should be ready to use.</p>
+<h2 id="using-the-workspace">Using the workspace</h2>
+<p>The workspace needs to be sourced every time a new terminal is used (
+and Conda environment activated before that).</p>
+<p>The overall instructions for setting up a new terminal to use the built
+workspace are:</p>
+<pre><code class="language-bash"># CMD
+conda activate gz-ws
+call install\setup.bat
+
+# PowerShell
+conda activate gz-ws
+.\install\setup.ps1
+</code></pre>
+<p>You should now be able to launch gazebo:</p>
+<pre><code class="language-bash"># Launch server in one terminal 
+gz sim -s
+
+# In separate terminal, launch gui
+gz sim -g
+</code></pre>
+<p>This is the end of the source install instructions; head back to the <a href="getstarted">Getting started</a>
+page to start using Gazebo!</p>
+<blockquote>
+<p><strong>NOTE</strong>
+If your username contains spaces (which is quite common on Windows), you will probably get errors
+ saying <code>Invalid partition name [Computer:My User With Spaces]</code>. Fix this by changing <code>GZ_PARTITION</code>
+ to something else:
+<code>bat
+set GZ_PARTITION=test</code>
+Remember to set the same partition in all other consoles.</p>
+</blockquote>
+<h3 id="gazebo-gui-workaround">Gazebo GUI workaround</h3>
+<p>Although running <code>gz sim</code> without arguments is not supported on Windows,
+ the <code>gz sim -g</code> command is  supported, and you can use it to launch the graphical interface on Windows.</p>
+<p>This should allow you to run the GUI in a separate console, connecting to the server running in another console.</p>
+<h2 id="uninstalling-source-based-install">Uninstalling source-based install</h2>
+<p>A source-based install can be "uninstalled" using several methods, depending on
+the results you want:</p>
+<ol>
+<li>
+<p>If you installed your workspace with <code>colcon</code> as instructed above, "uninstalling"
+     could be just a matter of opening a new terminal and not sourcing the
+     workspace's <code>setup.bat</code>. This way, your environment will behave as though
+     Gazebo is not installed on your system.</p>
+</li>
+<li>
+<p>If, in addition to not wanting to use the libraries, you're also trying to
+     free up space, you can delete the entire workspace directory from within
+     your <code>conda</code> environment with:</p>
+<p><code>bash
+ rm -rf &lt;workspace_name&gt;</code></p>
+</li>
+<li>
+<p>If you want to keep the source code, you can remove the
+     <code>install</code> / <code>build</code> / <code>log</code> directories as desired, leaving the <code>src</code> directory.</p>
+</li>
+<li>
+<p>Last, if you do not need the conda environment anymore, you can remove it with</p>
+<p><code>bash
+ conda deactivate
+ conda remove --all --name &lt;env_name&gt;
+ # or conda remove --all --prefix &lt;path_to_env&gt; if you installed to custom path</code></p>
+</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>See <a href="troubleshooting.html#windows">Troubleshooting</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/gazebosim/gz-sim" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+    
+  </body>
+</html>
