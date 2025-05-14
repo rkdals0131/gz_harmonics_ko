@@ -191,6 +191,81 @@ ROS를 사용하는 경우 이러한 예제에 대한 데모 실행 및 브리�
 
 [Moving robot tutorial](moving_robot)에서 설명했듯이 수신된 입력에 따라 출력을 게시할 수 있습니다. 따라서 `/wall/touched` 토픽에서 `data: true`를 수신하면 `linear: {x: 0.0}, angular: {z: 0.0}`을 게시하여 로봇을 멈춥니다.
 
+## Camera
+Gazebo는 시뮬레이션 환경에서 카메라 센서를 모델링하는 기능을 제공합니다. 이를 통해 로봇이 주변 환경을 "볼" 수 있도록 하여 이미지 기반 인식 및 탐색 알고리즘을 개발하고 테스트할 수 있습니다.
+
+다음은 `vehicle_blue` 모델의 `chassis` 링크에 카메라 센서를 추가하는 예시입니다.
+
+```xml
+<sensor name="camera_sensor" type="camera">
+    <always_on>1</always_on>
+    <update_rate>30</update_rate>
+    <visualize>true</visualize>
+    <topic>camera</topic>
+    <camera>
+        <horizontal_fov>1.0472</horizontal_fov>
+        <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+        </image>
+        <lens>
+            <intrinsics>
+                <fx>554.25</fx>
+                <fy>554.25</fy>
+                <cx>320.5</cx>
+                <cy>240.5</cy>
+                <s>0</s>
+            </intrinsics>
+        </lens>
+        <distortion>
+            <k1>0.0</k1>
+            <k2>0.0</k2>
+            <k3>0.0</k3>
+            <p1>0.0</p1>
+            <p2>0.0</p2>
+        </distortion>
+        <clip>
+            <near>0.1</near>
+            <far>100</far>
+        </clip>
+        <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+        </noise>
+    </camera>
+</sensor>
+```
+
+각 태그에 대한 설명은 다음과 같습니다.
+
+*   `<always_on>`: `true` (또는 `1`)로 설정하면 센서가 항상 활성화되어 `<update_rate>`에 따라 데이터를 생성합니다.
+*   `<update_rate>`: 센서 데이터가 생성되는 주기 (Hz)입니다.
+*   `<visualize>`: `true`로 설정하면 시뮬레이션 GUI에서 카메라 뷰가 시각적으로 표시될 수 있습니다.
+*   `<topic>`: 카메라 이미지 데이터가 게시될 토픽의 이름입니다.
+*   `<camera>`: 카메라 센서의 상세 설정을 포함하는 부모 태그입니다.
+    *   `<horizontal_fov>`: 카메라의 수평 시야각 (라디안 단위)입니다. 예를 들어 `1.0472`는 약 60도에 해당합니다.
+    *   `<image>`: 생성될 이미지의 속성을 정의합니다.
+        *   `<width>`: 이미지의 가로 해상도 (픽셀 단위)입니다.
+        *   `<height>`: 이미지의 세로 해상도 (픽셀 단위)입니다.
+        *   `<format>`: 이미지의 픽셀 포맷입니다. `R8G8B8`은 각 채널당 8비트의 RGB 이미지를 의미합니다.
+    *   `<lens>`: 카메라 렌즈의 광학적 특성을 설정합니다.
+        *   `<intrinsics>`: 내부 파라미터를 정의합니다.
+            *   `<fx>`, `<fy>`: 렌즈의 초점 거리 (픽셀 단위)입니다.
+            *   `<cx>`, `<cy>`: 이미지의 주점(principal point) 좌표 (픽셀 단위)입니다. 일반적으로 이미지 중심에 가깝습니다.
+            *   `<s>`: 비대칭(skew) 계수입니다. 일반적으로 `0`입니다.
+    *   `<distortion>` (선택 사항): 렌즈 왜곡 모델을 정의합니다.
+        *   `<k1>`, `<k2>`, `<k3>`: 방사형 왜곡(radial distortion) 계수입니다.
+        *   `<p1>`, `<p2>`: 접선 왜곡(tangential distortion) 계수입니다.
+    *   `<clip>` (선택 사항): 센서의 렌더링 범위를 제한합니다.
+        *   `<near>`: 이 값(미터 단위)보다 가까운 물체는 렌더링에서 제외될 수 있습니다.
+        *   `<far>`: 이 값(미터 단위)보다 먼 물체는 렌더링에서 제외될 수 있습니다.
+    *   `<noise>` (선택 사항): 센서 데이터에 적용할 노이즈 모델을 정의합니다.
+        *   `<type>`: 노이즈의 유형을 지정합니다 (예: `gaussian`은 가우시안 노이즈).
+        *   `<mean>`: 노이즈 분포의 평균값입니다.
+        *   `<stddev>`: 노이즈 분포의 표준 편차입니다.
+
 ## Lidar sensor
 
 로봇이 벽에 전혀 닿지 않기를 원합니다. 왜냐하면 이것은 약간의 손상을 일으킬 수 있기 때문입니다. 그래서 접촉 센서 대신 Lidar를 사용할 수 있습니다. Lidar는 "light detection and ranging"의 약자입니다. 이 센서는 로봇 주변의 장애물을 감지하는 데 도움이 될 수 있습니다. 우리는 이것을 사용하여 로봇과 벽 사이의 거리를 측정할 것입니다.
@@ -405,7 +480,56 @@ make lidar_node
 gz sim sensor_tutorial.sdf
 ```
 
-이제 로봇이 앞으로 움직이고 벽에 접근하면 왼쪽으로 회전하기 시작하여 장애물이 없어지면 다시 앞으로 움직이는 것을 볼 수 있습니다(로봇이 움직이기 시작하도록 왼쪽 하단 모서리에 있는 재생 버튼을 눌러야 합니다).
+이제 로봇이 앞으로 움직이고 벽을 피하고 있습니다.
+
+## GNSS
+
+GNSS(Global Navigation Satellite System) 센서는 시뮬레이션 환경에서 로봇이나 모델의 전역 위치(위도, 경도, 고도) 정보를 제공합니다. 이를 통해 실제 GPS와 유사한 데이터를 사용하여 네비게이션 및 위치 추정 알고리즘을 개발하고 테스트할 수 있습니다.
+
+다음은 `vehicle_blue` 모델의 `chassis` 링크에 GNSS 센서를 추가하는 예시입니다.
+
+```xml
+<sensor name="gnss_sensor" type="gnss">
+    <always_on>1</always_on>
+    <update_rate>30</update_rate>
+    <visualize>false</visualize>
+    <topic>/gps/fix</topic>
+    <position_sensing>
+        <horizontal_noise>
+            <mean>0</mean>
+            <stddev>2.5</stddev> <!-- 수평 정확도 예시 (m) -->
+            <bias_mean>0</bias_mean>
+            <bias_stddev>0</bias_stddev>
+        </horizontal_noise>
+        <vertical_noise>
+            <mean>0</mean>
+            <stddev>5.0</stddev> <!-- 수직 정확도 예시 (m) -->
+            <bias_mean>0</bias_mean>
+            <bias_stddev>0</bias_stddev>
+        </vertical_noise>
+    </position_sensing>
+    <frame_id>gnss_link</frame_id>
+</sensor>
+```
+
+각 태그에 대한 설명은 다음과 같습니다.
+
+*   `<always_on>`: `true` (또는 `1`)로 설정하면 센서가 항상 활성화되어 `<update_rate>`에 따라 데이터를 생성합니다.
+*   `<update_rate>`: 센서 데이터가 생성되는 주기 (Hz)입니다. GNSS 센서의 경우 일반적으로 1~10Hz 사이지만, 예시에서는 고속 업데이트를 위해 `30Hz`로 설정했습니다.
+*   `<visualize>`: `true`로 설정하면 시뮬레이션 GUI에서 GNSS 센서의 위치가 구체 등으로 시각화될 수 있습니다. 기본값은 `false`입니다.
+*   `<topic>`: GNSS 데이터(일반적으로 `sensor_msgs/NavSatFix` 메시지 타입)가 게시될 토픽의 이름입니다. 예: `/gps/fix`.
+*   `<position_sensing>`: 위치 측정과 관련된 노이즈 및 정확도 설정을 포함합니다.
+    *   `<horizontal_noise>`: 수평 위치(위도, 경도)에 대한 노이즈 특성을 정의합니다.
+        *   `<mean>`: 노이즈 분포의 평균값입니다.
+        *   `<stddev>`: 노이즈 분포의 표준 편차입니다. 이 값은 센서의 수평 정확도(m)와 관련될 수 있습니다.
+        *   `<bias_mean>`: 위치 측정값에 추가될 고정된 오차(바이어스)의 평균값입니다.
+        *   `<bias_stddev>`: 바이어스의 표준 편차입니다.
+    *   `<vertical_noise>`: 수직 위치(고도)에 대한 노이즈 특성을 정의합니다.
+        *   `<mean>`: 노이즈 분포의 평균값입니다.
+        *   `<stddev>`: 노이즈 분포의 표준 편차입니다. 이 값은 센서의 수직 정확도(m)와 관련될 수 있습니다.
+        *   `<bias_mean>`: 고도 측정값에 추가될 고정된 오차(바이어스)의 평균값입니다.
+        *   `<bias_stddev>`: 바이어스의 표준 편차입니다.
+*   `<frame_id>`: 발행되는 메시지의 헤더에 포함될 프레임 ID입니다. TF(Transform) 트리에서 이 센서의 좌표계를 나타내는 데 사용됩니다.
 
 ## Gazebo launch
 
